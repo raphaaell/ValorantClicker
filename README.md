@@ -3,6 +3,21 @@
 ## English
 ### Description
 Valorant Clicker is an mobile application on the theme of Valorant (The game of Riot Games).
+### Pictures
+
+##### Valorant Clicker Logo
+![Valorant Clicker Logo](https://i.ibb.co/yh5qfDP/logo-valo-round.png)
+
+##### [First Screen] First thing you see when you arrive on the app. The image of sova in the middle is here that you have to click to get coins, coins that can be seen at the top with the "384" before. There is also the menu button next to the coins to open the menu.
+![Valorant First Screen](https://i.ibb.co/DDTcV9q/Screenshot-1595533388.png)
+
+#### [Second Screen] You can see the menu on the left. It is in two parts, the "Valorant" part, with the "Clicker", it is the first screen just above. Below you have the "Agents" part, wich open the third screen. And still below you have the "shop" category, which is not yet done. After the "Valorant" part, there is the "Other" category. First there is the "Statistics" part, it is not yet done but it is where there will be all the clicker statistics. Second there is the "Settings" part, it is not yet done. And finally there is the "About" part which is not yet done but wich will explain the purpose of the application, and will display the creator of the application (me ;)).
+![Valorant Second Screen](https://i.ibb.co/Fhgf2b9/Screenshot-1595533571.png)
+
+#### [Third Screen] Here is the choice of agents. There are the 11 agents available in Valorant, just click on them and the image in the middle of the clicker will change with the character of your choice.
+![Valorant Third Screen](https://i.ibb.co/LxGs15v/Screenshot-1595533575.png)
+
+
 ### Usage
 Please don't copy this app to publish it on Playstore or Appstore.
 Please don't use this project for commercial use
