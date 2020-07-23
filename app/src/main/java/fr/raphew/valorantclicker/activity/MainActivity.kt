@@ -245,6 +245,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             imgSova.visibility = View.VISIBLE
     }
 
-
 }
 
