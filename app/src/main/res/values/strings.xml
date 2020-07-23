@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Valorant Clicker</string>
+
+    <string name="navigation_drawer_open" translatable="false">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close Navigation Drawer</string>
+    <string name="menu" translatable="false">Menu</string>
+
+    <string name="stats_title">Statistics</string>
+    <string name="settings_title">Settings</string>
+    <string name="about_title">About</string>
+    <string name="leave_title">Exit</string>
+    <string name="choose_agents">Choose your agents</string>
+    <string name="cancel_button">Cancel</string>
+</resources>

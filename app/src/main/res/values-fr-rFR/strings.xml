@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Valorant Clicker</string>
+    <string name="stats_title">Statistiques</string>
+    <string name="settings_title">Paramètres</string>
+    <string name="about_title">À propos</string>
+    <string name="leave_title">Quitter</string>
+    <string name="choose_agents">Choisissez votre agents</string>
+    <string name="cancel_button">Annuler</string>
+</resources>
