@@ -7,11 +7,12 @@ Valorant Clicker is an mobile application on the theme of Valorant (The game of 
 ### Changelog
 
 * Update 24/07/2020 | 15:49
-  * Add 2 buttons on the clicker for open the "Shop" parts and the "Agents" parts.
+  * Add 2 buttons on the clicker for open the "Shop" part and the "Agents" part.
   * Reset all statistics and clicks because add "coins" for a futur update.
   * Add a system to open the "Agents" popup if it's the first time you open the app.
-  * Update the "Statistics" parts to see all the statistics of the clicker (Clicks on agents, total clicks...).
+  * Update the "Statistics" part to see all the statistics of the clicker (Clicks on agents, total clicks...).
   * Update and add pictures on the README
+  * Update the valorant.apk to test the new update of Valorant Clicker on your smartphone
 * Update 24/07/2020 | 13:51
   * Add the "About" fragment to project
 * Update 23/07/2020 | 23:15
