@@ -1,5 +1,6 @@
 package fr.raphew.valorantclicker.onClick
 
+import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.view.View
@@ -10,6 +11,7 @@ class RazeClick(mainActivity: MainActivity) : View.OnClickListener {
 
     val mainActivity: MainActivity = mainActivity
     var click: Int = 0
+    var coins: Int = 0
     var clickAgents: Int = 0
 
     override fun onClick(v: View?) {
@@ -17,9 +19,9 @@ class RazeClick(mainActivity: MainActivity) : View.OnClickListener {
             R.id.img_raze -> {
                 val sharedPreferences: SharedPreferences = mainActivity.getPreferences(MODE_PRIVATE)
                 click = sharedPreferences.getInt("click", 0)
+                coins = sharedPreferences.getInt("coins", 0)
                 clickAgents = sharedPreferences.getInt("clickRaze", 0)
-                click++
-                clickAgents++
+                pp()
                 save()
                 val a = "$click "
                 mainActivity.textCoins.text = a
@@ -29,11 +31,19 @@ class RazeClick(mainActivity: MainActivity) : View.OnClickListener {
 
     private fun save(){
         val click: Int = this.click
+        val coins: Int = this.coins
         val clickAgents: Int = this.clickAgents
-        val sharedPreferences: SharedPreferences = mainActivity.getPreferences(MODE_PRIVATE)
+        val sharedPreferences: SharedPreferences = mainActivity.getPreferences(Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putInt("click", click)
+        editor.putInt("coins", coins)
         editor.putInt("clickRaze", clickAgents)
         editor.apply()
+    }
+
+    fun pp(){
+        this.click++
+        this.coins++
+        this.clickAgents++
     }
 }

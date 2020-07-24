@@ -10,7 +10,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
-import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
@@ -85,7 +84,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         imgViper.setOnClickListener(ViperClick(this))
         imgCypher.setOnClickListener(CypherClick(this))
 
+        val agentsButton: ImageView = findViewById(R.id.agents_button_clicker)
+        val shopButton: ImageView = findViewById(R.id.shop_button_clicker)
+        agentsButton.setOnClickListener { AgentsClick(this).click() }
+        shopButton.setOnClickListener {
+            saveCurrentAgents()
+            goneAll()
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ShopFragment()).commit()
+            navigationView.setCheckedItem(R.id.nav_shop)
+        }
+
         val sharedPreferences = getPreferences(Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
         val click: Int = sharedPreferences.getInt("click", 0)
         val a: String = "$click "
         textCoins.text = a
@@ -94,6 +104,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         if(savedInstanceState == null){
             navigationView.setCheckedItem(R.id.nav_home)
+        }
+
+        val patch01: Boolean = sharedPreferences.getBoolean("patch01", false)
+        if(!patch01){
+            reset()
+            editor.putBoolean("patch01", true)
+            editor.apply()
+        }
+
+        val firstTime: Boolean = sharedPreferences.getBoolean("firstTime", true)
+        if(firstTime){
+            AgentsClick(this).click()
+            editor.putBoolean("firstTime", false)
+            editor.apply()
         }
 
     }
@@ -138,14 +162,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_stats -> {
                 saveCurrentAgents()
                 goneAll()
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, StatsFragment()).commit()
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, StatsFragment(this)).commit()
             }
 
             // settings
             R.id.nav_settings -> {
-                val fm: FragmentManager = supportFragmentManager
-                val dialog: SettingsDialog = SettingsDialog()
-                dialog.show(fm, "dialog")
+                val dialog = SettingsDialog()
+                dialog.show(supportFragmentManager, "dialog")
             }
 
             // about
@@ -246,6 +269,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             agentsToShow(agents)
         else
             imgSova.visibility = View.VISIBLE
+    }
+
+    fun reset(){
+        val sharedPreferences = getPreferences(Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        editor
+            .remove("click")
+            .remove("coins")
+            .remove("clickSova")
+            .remove("clickRaze")
+            .remove("clickJett")
+            .remove("clickReyna")
+            .remove("clickBreach")
+            .remove("clickBrimstone")
+            .remove("clickSage")
+            .remove("clickPhoenix")
+            .remove("clickCypher")
+            .remove("clickViper")
+            .remove("clickOmen")
+            .remove("agents")
+            .apply()
     }
 
 }

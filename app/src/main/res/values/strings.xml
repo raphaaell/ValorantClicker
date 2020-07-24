@@ -11,4 +11,19 @@
     <string name="leave_title">Exit</string>
     <string name="choose_agents">Choose your agents</string>
     <string name="cancel_button">Cancel</string>
+    <string name="stats_total_clicks">Total Clicks :</string>
+    <string name="stats_name_clicks">clicks</string>
+    <string name="shop_title">Shop</string>
+    <string name="stats_sova_clicks">Clicks on Sova :</string>
+    <string name="stats_raze_clicks">Clicks on Raze :</string>
+    <string name="stats_sage_clicks">Clicks on Sage :</string>
+    <string name="stats_reyna_clicks">Clicks on Reyna :</string>
+    <string name="stats_phoenix_clicks">Clicks on Phoenix :</string>
+    <string name="stats_breach_clicks">Clicks on Breach :</string>
+    <string name="stats_brimstone_clicks">Clicks on Brimstone :</string>
+    <string name="stats_jett_clicks">Clicks on Jett :</string>
+    <string name="stats_viper_clicks">Clicks on Viper :</string>
+    <string name="stats_cypher_clicks">Clicks on Cypher :</string>
+    <string name="stats_omen_clicks">Clicks on Omen</string>
+    <string name="stats_current_coins">Current coins :</string>
 </resources>

@@ -10,6 +10,7 @@ class OmenClick(mainActivity: MainActivity) : View.OnClickListener {
 
     val mainActivity: MainActivity = mainActivity
     var click: Int = 0
+    var coins: Int = 0
     var clickAgents: Int = 0
 
     override fun onClick(v: View?) {
@@ -17,9 +18,9 @@ class OmenClick(mainActivity: MainActivity) : View.OnClickListener {
             R.id.img_omen -> {
                 val sharedPreferences: SharedPreferences = mainActivity.getPreferences(Context.MODE_PRIVATE)
                 click = sharedPreferences.getInt("click", 0)
+                coins = sharedPreferences.getInt("coins", 0)
                 clickAgents = sharedPreferences.getInt("clickOmen", 0)
-                click++
-                clickAgents++
+                pp()
                 save()
                 val a = "$click "
                 mainActivity.textCoins.text = a
@@ -29,11 +30,19 @@ class OmenClick(mainActivity: MainActivity) : View.OnClickListener {
 
     private fun save(){
         val click: Int = this.click
+        val coins: Int = this.coins
         val clickAgents: Int = this.clickAgents
         val sharedPreferences: SharedPreferences = mainActivity.getPreferences(Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putInt("click", click)
+        editor.putInt("coins", coins)
         editor.putInt("clickOmen", clickAgents)
         editor.apply()
+    }
+
+    fun pp(){
+        this.click++
+        this.coins++
+        this.clickAgents++
     }
 }

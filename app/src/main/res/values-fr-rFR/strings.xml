@@ -7,4 +7,19 @@
     <string name="leave_title">Quitter</string>
     <string name="choose_agents">Choisissez votre agents</string>
     <string name="cancel_button">Annuler</string>
+    <string name="stats_total_clicks">Clics Total :</string>
+    <string name="stats_name_clicks">clics</string>
+    <string name="shop_title">Boutique</string>
+    <string name="stats_sova_clicks">Clics sur Sova :</string>
+    <string name="stats_raze_clicks">Clics sur Raze :</string>
+    <string name="stats_sage_clicks">Clics sur Sage :</string>
+    <string name="stats_reyna_clicks">Clics sur Reyna :</string>
+    <string name="stats_phoenix_clicks">Clics sur Phoenix :</string>
+    <string name="stats_breach_clicks">Clics suir Breach :</string>
+    <string name="stats_brimstone_clicks">Clics sur Brimstone :</string>
+    <string name="stats_jett_clicks">Clics sur Jett :</string>
+    <string name="stats_viper_clicks">Clics sur Viper :</string>
+    <string name="stats_cypher_clicks">Clics sur Cypher :</string>
+    <string name="stats_omen_clicks">Clics sur Omen :</string>
+    <string name="stats_current_coins">Pièces actuelles :</string>
 </resources>
