@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
 import fr.raphew.valorantclicker.R
 import fr.raphew.valorantclicker.dialog.SettingsDialog
+import fr.raphew.valorantclicker.fragment.AboutFragment
 import fr.raphew.valorantclicker.fragment.ShopFragment
 import fr.raphew.valorantclicker.fragment.StatsFragment
 import fr.raphew.valorantclicker.onClick.*
@@ -149,7 +150,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             // about
             R.id.nav_about -> {
-
+                saveCurrentAgents()
+                goneAll()
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, AboutFragment()).commit()
             }
         }
 
