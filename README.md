@@ -13,6 +13,7 @@ Valorant Clicker is an mobile application on the theme of Valorant (The game of 
   * Update the "Statistics" part to see all the statistics of the clicker (Clicks on agents, total clicks...).
   * Update and add pictures on the README
   * Update the valorant.apk to test the new update of Valorant Clicker on your smartphone
+  * Changed the position of the clicks on the "Clicker" part.
 * Update 24/07/2020 | 13:51
   * Add the "About" fragment to project
 * Update 23/07/2020 | 23:15
