@@ -6,6 +6,9 @@ Valorant Clicker is an mobile application on the theme of Valorant (The game of 
 
 ### Changelog
 
+
+* Update 24/07/2020 | 13:51
+  * Add the "About" fragment to project
 * Update 23/07/2020 | 23:15
   * Add valorant.apk to test Valorant Clicker on your smartphone !
 
