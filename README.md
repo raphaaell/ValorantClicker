@@ -4,6 +4,8 @@
 ### Description
 Valorant Clicker is an mobile application on the theme of Valorant (The game of Riot Games).
 
+Join our discord (in french) : https://discord.gg/YautDZj
+
 ### Changelog
 
 
