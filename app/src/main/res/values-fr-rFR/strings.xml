@@ -22,4 +22,5 @@
     <string name="stats_cypher_clicks">Clics sur Cypher :</string>
     <string name="stats_omen_clicks">Clics sur Omen :</string>
     <string name="stats_current_coins">Pièces actuelles :</string>
+    <string name="stats_killjoy_clicks">Clics sur Killjoy :</string>
 </resources>

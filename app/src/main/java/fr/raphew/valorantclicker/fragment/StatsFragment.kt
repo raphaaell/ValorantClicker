@@ -79,6 +79,11 @@ class StatsFragment(mainActivity: MainActivity) : Fragment() {
         val valueOmenClicks: String = getString(R.string.stats_omen_clicks) + " " + omenClicks.toString() + " " + getString(R.string.stats_name_clicks)
         textStatsOmenClicks.text = valueOmenClicks
 
+        val textStatsKilljoyClicks: TextView = v.findViewById(R.id.stats_killjoy_clicks)
+        val killjoyClicks: Int = sharedPreferences.getInt("clickKilljoy", 0)
+        val valueKilljoyClicks: String = getString(R.string.stats_killjoy_clicks) + " " + killjoyClicks.toString() + " " + getString(R.string.stats_name_clicks)
+        textStatsKilljoyClicks.text = valueKilljoyClicks
+
         val textStatsCurrentCoins: TextView = v.findViewById(R.id.stats_current_money)
         val currentCoins: Int = sharedPreferences.getInt("coins", 0)
         val valueCurrentCoins: String = getString(R.string.stats_current_coins) + " " + currentCoins.toString() + " "

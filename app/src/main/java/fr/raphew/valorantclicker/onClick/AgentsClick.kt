@@ -9,9 +9,8 @@ class AgentsClick(
     mainActivity: MainActivity
 ) {
 
-    val items: Array<String> = arrayOf("Sova", "Jett", "Raze", "Reyna", "Breach", "Brimstone", "Sage", "Phoenix", "Cypher", "Viper", "Omen")
+    val items: Array<String> = arrayOf("Sova", "Jett", "Raze", "Reyna", "Breach", "Brimstone", "Sage", "Phoenix", "Cypher", "Viper", "Omen", "Killjoy")
     val mainActivity: MainActivity = mainActivity
-
 
     fun click(){
         val builder: AlertDialog.Builder = AlertDialog.Builder(mainActivity)

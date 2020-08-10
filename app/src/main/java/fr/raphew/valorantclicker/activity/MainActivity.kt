@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var drawer: DrawerLayout
     lateinit var navigationView: NavigationView
 
-    val items: Array<String> = arrayOf("Sova", "Jett", "Raze", "Reyna", "Breach", "Brimstone", "Sage", "Phoenix", "Cypher", "Viper", "Omen")
+    val items: Array<String> = arrayOf("Sova", "Jett", "Raze", "Reyna", "Breach", "Brimstone", "Sage", "Phoenix", "Cypher", "Viper", "Omen", "Killjoy")
 
     lateinit var imgSova: ImageView
     lateinit var imgRaze: ImageView
@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var imgJett: ImageView
     lateinit var imgViper: ImageView
     lateinit var imgCypher: ImageView
+    lateinit var imgKilljoy: ImageView
 
     lateinit var textCoins: TextView
 
@@ -71,6 +72,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         imgJett = findViewById(R.id.img_jett)
         imgViper = findViewById(R.id.img_viper)
         imgCypher = findViewById(R.id.img_cypher)
+        imgKilljoy = findViewById(R.id.img_killjoy)
 
         imgSova.setOnClickListener(SovaClick(this))
         imgRaze.setOnClickListener(RazeClick(this))
@@ -83,6 +85,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         imgJett.setOnClickListener(JettClick(this))
         imgViper.setOnClickListener(ViperClick(this))
         imgCypher.setOnClickListener(CypherClick(this))
+        imgKilljoy.setOnClickListener(KilljoyClick(this))
+
 
         val agentsButton: ImageView = findViewById(R.id.agents_button_clicker)
         val shopButton: ImageView = findViewById(R.id.shop_button_clicker)
@@ -196,6 +200,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         imgJett.visibility = View.GONE
         imgViper.visibility = View.GONE
         imgCypher.visibility = View.GONE
+        imgKilljoy.visibility = View.GONE
     }
 
     fun agentsToShow(index: Int){
@@ -213,6 +218,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             "Jett" -> imgJett.visibility = View.VISIBLE
             "Viper" -> imgViper.visibility = View.VISIBLE
             "Cypher" -> imgCypher.visibility = View.VISIBLE
+            "Killjoy" -> imgKilljoy.visibility = View.VISIBLE
         }
     }
 
@@ -230,6 +236,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             "Jett" -> imgJett.visibility = View.VISIBLE
             "Viper" -> imgViper.visibility = View.VISIBLE
             "Cypher" -> imgCypher.visibility = View.VISIBLE
+            "Killjoy" -> imgKilljoy.visibility = View.VISIBLE
         }
     }
 
@@ -258,6 +265,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             editor.putString("agents", "Viper")
         else if(imgCypher.visibility == View.VISIBLE)
             editor.putString("agents", "Cypher")
+        else if (imgKilljoy.visibility == View.VISIBLE)
+            editor.putString("agents", "Killjoy")
 
         editor.apply()
     }
@@ -289,6 +298,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             .remove("clickCypher")
             .remove("clickViper")
             .remove("clickOmen")
+            .remove("clickKilljoy")
             .remove("agents")
             .apply()
     }
