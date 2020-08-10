@@ -6,6 +6,9 @@ Valorant Clicker is an mobile application on the theme of Valorant (The game of 
 
 ### Changelog
 
+
+* Update 10/08/2020 | 17:53
+  * Add Killjoy to agents
 * Update 24/07/2020 | 15:49
   * Add 2 buttons on the clicker for open the "Shop" part and the "Agents" part.
   * Reset all statistics and clicks because add "coins" for a futur update.
