@@ -8,7 +8,11 @@ Join our discord (in french) : https://discord.gg/YautDZj
 
 ### Changelog
 
-
+* Update 17/08/2020 | 15:38
+  * Modified all of click value (SovaClick, Coins, Click...) to float for the futur gameplay update.
+  * Update the fragment "About", "Shop" and "Settings" to show "Coming soon !" instead of their name.
+  * Fixed bugs :
+    * Select an agents if you are not in the clicker part, will not change the agents when comeback to the clicker | ✅ Fixed.
 * Update 10/08/2020 | 17:53
   * Add Killjoy to agents
 * Update 24/07/2020 | 15:49
