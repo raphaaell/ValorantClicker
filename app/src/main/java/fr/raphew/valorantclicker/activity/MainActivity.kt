@@ -6,12 +6,12 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
 import fr.raphew.valorantclicker.R
 import fr.raphew.valorantclicker.dialog.SettingsDialog
@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val sharedPreferences = getPreferences(Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        val click: Int = sharedPreferences.getInt("click", 0)
+        val click = sharedPreferences.getFloat("click", 0F)
         val a: String = "$click "
         textCoins.text = a
 
@@ -121,6 +121,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if(firstTime){
             AgentsClick(this).click()
             editor.putBoolean("firstTime", false)
+            editor.apply()
+        }
+
+        val patch02: Boolean = sharedPreferences.getBoolean("patch02", false)
+        if(!patch02){
+            reset()
+            editor.putBoolean("patch02", true)
             editor.apply()
         }
 
@@ -171,8 +178,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             // settings
             R.id.nav_settings -> {
-                val dialog = SettingsDialog()
+                /* val dialog = SettingsDialog()
                 dialog.show(supportFragmentManager, "dialog")
+                */
+
+                Toast.makeText(this, getString(R.string.soon), Toast.LENGTH_LONG).show()
             }
 
             // about
@@ -204,22 +214,62 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun agentsToShow(index: Int){
+        val sharedPreferences = getPreferences(Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
         val choice: String = items[index]
         goneAll()
         when (choice) {
-            "Sova" -> imgSova.visibility = View.VISIBLE
-            "Raze" -> imgRaze.visibility = View.VISIBLE
-            "Sage" -> imgSage.visibility = View.VISIBLE
-            "Omen" -> imgOmen.visibility = View.VISIBLE
-            "Phoenix" -> imgPhoenix.visibility = View.VISIBLE
-            "Breach" -> imgBreach.visibility = View.VISIBLE
-            "Brimstone" -> imgBrimstone.visibility = View.VISIBLE
-            "Reyna" -> imgReyna.visibility = View.VISIBLE
-            "Jett" -> imgJett.visibility = View.VISIBLE
-            "Viper" -> imgViper.visibility = View.VISIBLE
-            "Cypher" -> imgCypher.visibility = View.VISIBLE
-            "Killjoy" -> imgKilljoy.visibility = View.VISIBLE
+            "Sova" -> {
+                editor.putString("agents", "Sova")
+                imgSova.visibility = View.VISIBLE
+            }
+            "Raze" -> {
+                editor.putString("agents", "Raze")
+                imgRaze.visibility = View.VISIBLE
+            }
+            "Sage" -> {
+                editor.putString("agents", "Sage")
+                imgSage.visibility = View.VISIBLE
+            }
+            "Omen" -> {
+                editor.putString("agents", "Omen")
+                imgOmen.visibility = View.VISIBLE
+            }
+            "Phoenix" -> {
+                editor.putString("agents", "Phoenix")
+                imgPhoenix.visibility = View.VISIBLE
+            }
+            "Breach" -> {
+                editor.putString("agents", "Breach")
+                imgBreach.visibility = View.VISIBLE
+            }
+            "Brimstone" -> {
+                editor.putString("agents", "Brimstone")
+                imgBrimstone.visibility = View.VISIBLE
+            }
+            "Reyna" -> {
+                editor.putString("agents", "Reyna")
+                imgReyna.visibility = View.VISIBLE
+            }
+            "Jett" -> {
+                editor.putString("agents", "Jett")
+                imgJett.visibility = View.VISIBLE
+            }
+            "Viper" -> {
+                editor.putString("agents", "Viper")
+                imgViper.visibility = View.VISIBLE
+            }
+            "Cypher" -> {
+                editor.putString("agents", "Cypher")
+                imgCypher.visibility = View.VISIBLE
+            }
+            "Killjoy" -> {
+                editor.putString("agents", "Killjoy")
+                imgKilljoy.visibility = View.VISIBLE
+            }
         }
+
+        editor.apply()
     }
 
     fun agentsToShow(index: String){

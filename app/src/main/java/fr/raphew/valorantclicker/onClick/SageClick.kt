@@ -10,17 +10,17 @@ import fr.raphew.valorantclicker.activity.MainActivity
 class SageClick(mainActivity: MainActivity) : View.OnClickListener {
 
     val mainActivity: MainActivity = mainActivity
-    var click: Int = 0
-    var coins: Int = 0
-    var clickAgents: Int = 0
+    var click: Float = 0F
+    var coins: Float = 0F
+    var clickAgents: Float = 0F
 
     override fun onClick(v: View?) {
         when (v?.id){
             R.id.img_sage -> {
                 val sharedPreferences: SharedPreferences = mainActivity.getPreferences(MODE_PRIVATE)
-                click = sharedPreferences.getInt("click", 0)
-                coins = sharedPreferences.getInt("coins", 0)
-                clickAgents = sharedPreferences.getInt("clickSage", 0)
+                click = sharedPreferences.getFloat("click", 0F)
+                coins = sharedPreferences.getFloat("coins", 0F)
+                clickAgents = sharedPreferences.getFloat("clickSage", 0F)
                 pp()
                 save()
                 val a = "$click "
@@ -30,14 +30,14 @@ class SageClick(mainActivity: MainActivity) : View.OnClickListener {
     }
 
     private fun save(){
-        val click: Int = this.click
-        val coins: Int = this.coins
-        val clickAgents: Int = this.clickAgents
+        val click: Float = this.click
+        val coins: Float = this.coins
+        val clickAgents: Float = this.clickAgents
         val sharedPreferences: SharedPreferences = mainActivity.getPreferences(Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.putInt("click", click)
-        editor.putInt("coins", coins)
-        editor.putInt("clickSage", clickAgents)
+        editor.putFloat("click", click)
+        editor.putFloat("coins", coins)
+        editor.putFloat("clickSage", clickAgents)
         editor.apply()
     }
 
