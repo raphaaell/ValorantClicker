@@ -136,7 +136,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             editor.putBoolean("patch02", true)
             editor.apply()
         }
-        reset()
+
+        val patch03: Boolean = sharedPreferences.getBoolean("patch03", false)
+        if(!patch03){
+            reset()
+            editor.putBoolean("patch03", true)
+            editor.apply()
+        }
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
