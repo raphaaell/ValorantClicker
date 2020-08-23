@@ -7,7 +7,13 @@ Valorant Clicker is an mobile application on the theme of Valorant (The game of 
 Join our discord (in french) : https://discord.gg/YautDZj
 
 ### Changelog
-
+* Update 23/08/2020 | 23h59
+  * Deleted all the agents click class and modified the AgentsClick for the shop.
+  * Add button to the shop (temporarily) to test the feature of the shop.
+  * Modified the variable of clicks from float to int.
+  * Reset variable because changing variable type.
+  * Fixed bugs :
+    * If you change part (like go to the shop, statistics...), you can still click on the agents and shop button like in the clicker part and change parts wihout necessarily wanting to | ✅ Fixed.
 * Update 17/08/2020 | 15:38
   * Modified all of click value (SovaClick, Coins, Click...) to float for the futur gameplay update.
   * Update the fragment "About", "Shop" and "Settings" to show "Coming soon !" instead of their name.
