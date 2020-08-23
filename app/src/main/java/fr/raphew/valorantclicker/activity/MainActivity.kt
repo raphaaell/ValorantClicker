@@ -2,6 +2,7 @@ package fr.raphew.valorantclicker.activity
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
@@ -14,11 +15,11 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import fr.raphew.valorantclicker.R
-import fr.raphew.valorantclicker.dialog.SettingsDialog
 import fr.raphew.valorantclicker.fragment.AboutFragment
 import fr.raphew.valorantclicker.fragment.ShopFragment
 import fr.raphew.valorantclicker.fragment.StatsFragment
 import fr.raphew.valorantclicker.onClick.*
+import java.text.DecimalFormat
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -39,6 +40,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var imgViper: ImageView
     lateinit var imgCypher: ImageView
     lateinit var imgKilljoy: ImageView
+    lateinit var imgShop: ImageView
+    lateinit var imgAgents: ImageView
 
     lateinit var textCoins: TextView
 
@@ -74,37 +77,40 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         imgCypher = findViewById(R.id.img_cypher)
         imgKilljoy = findViewById(R.id.img_killjoy)
 
-        imgSova.setOnClickListener(SovaClick(this))
-        imgRaze.setOnClickListener(RazeClick(this))
-        imgSage.setOnClickListener(SageClick(this))
-        imgOmen.setOnClickListener(OmenClick(this))
-        imgPhoenix.setOnClickListener(PhoenixClick(this))
-        imgBreach.setOnClickListener(BreachClick(this))
-        imgBrimstone.setOnClickListener(BrimstoneClick(this))
-        imgReyna.setOnClickListener(ReynaClick(this))
-        imgJett.setOnClickListener(JettClick(this))
-        imgViper.setOnClickListener(ViperClick(this))
-        imgCypher.setOnClickListener(CypherClick(this))
-        imgKilljoy.setOnClickListener(KilljoyClick(this))
+        imgSova.setOnClickListener{ AgentsClick(this).onClick("Sova")}
+        imgRaze.setOnClickListener{ AgentsClick(this).onClick("Raze")}
+        imgSage.setOnClickListener{ AgentsClick(this).onClick("Sage")}
+        imgOmen.setOnClickListener{ AgentsClick(this).onClick("Omen")}
+        imgPhoenix.setOnClickListener{ AgentsClick(this).onClick("Phoenix")}
+        imgBreach.setOnClickListener{ AgentsClick(this).onClick("Breach")}
+        imgBrimstone.setOnClickListener{ AgentsClick(this).onClick("Brimstone")}
+        imgReyna.setOnClickListener{ AgentsClick(this).onClick("Reyna")}
+        imgJett.setOnClickListener{ AgentsClick(this).onClick("Jett")}
+        imgViper.setOnClickListener{ AgentsClick(this).onClick("Viper")}
+        imgCypher.setOnClickListener{ AgentsClick(this).onClick("Cypher")}
+        imgKilljoy.setOnClickListener{ AgentsClick(this).onClick("Killjoy")}
 
 
-        val agentsButton: ImageView = findViewById(R.id.agents_button_clicker)
-        val shopButton: ImageView = findViewById(R.id.shop_button_clicker)
-        agentsButton.setOnClickListener { AgentsClick(this).click() }
-        shopButton.setOnClickListener {
-            saveCurrentAgents()
+        imgAgents = findViewById(R.id.agents_button_clicker)
+        imgShop = findViewById(R.id.shop_button_clicker)
+        imgAgents.setOnClickListener { AgentsClick(this).click() }
+        imgShop.setOnClickListener {
             goneAll()
-            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ShopFragment()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ShopFragment(
+                this
+            )
+            ).commit()
             navigationView.setCheckedItem(R.id.nav_shop)
         }
 
         val sharedPreferences = getPreferences(Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        val click = sharedPreferences.getFloat("click", 0F)
-        val a: String = "$click "
-        textCoins.text = a
-
-        displayOldAgents()
+        val coins = sharedPreferences.getFloat("coins", 0F)
+        val df = DecimalFormat("#.#")
+        var format: String = df.format(coins)
+        format += " "
+        textCoins.text = format
+        displayAgents()
 
         if(savedInstanceState == null){
             navigationView.setCheckedItem(R.id.nav_home)
@@ -130,11 +136,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             editor.putBoolean("patch02", true)
             editor.apply()
         }
-
-    }
-
-    override fun onUserLeaveHint() {
-        saveCurrentAgents()
+        reset()
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -154,40 +156,31 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             // home
             R.id.nav_home -> {
                 try {
-                    displayOldAgents()
+                    displayAgents()
                     supportFragmentManager.beginTransaction().hide(supportFragmentManager.fragments.last()).commit()
                 }catch (e: Exception){ }
             }
-
             // agents
             R.id.nav_agents -> AgentsClick(this).click()
-
             // shop
             R.id.nav_shop -> {
-                saveCurrentAgents()
                 goneAll()
-                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ShopFragment()).commit()
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ShopFragment(this)).commit()
             }
-
             // stats
             R.id.nav_stats -> {
-                saveCurrentAgents()
                 goneAll()
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, StatsFragment(this)).commit()
             }
-
             // settings
             R.id.nav_settings -> {
                 /* val dialog = SettingsDialog()
                 dialog.show(supportFragmentManager, "dialog")
                 */
-
                 Toast.makeText(this, getString(R.string.soon), Toast.LENGTH_LONG).show()
             }
-
             // about
             R.id.nav_about -> {
-                saveCurrentAgents()
                 goneAll()
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, AboutFragment()).commit()
             }
@@ -211,70 +204,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         imgViper.visibility = View.GONE
         imgCypher.visibility = View.GONE
         imgKilljoy.visibility = View.GONE
+        imgAgents.visibility = View.GONE
+        imgShop.visibility = View.GONE
     }
 
-    fun agentsToShow(index: Int){
+    fun displayAgents(index: Int){
         val sharedPreferences = getPreferences(Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         val choice: String = items[index]
         goneAll()
+        try{
+            supportFragmentManager.beginTransaction().hide(supportFragmentManager.fragments.last()).commit()
+        }catch (e: Exception){ }
+        editor.putString("agents", choice)
         when (choice) {
-            "Sova" -> {
-                editor.putString("agents", "Sova")
-                imgSova.visibility = View.VISIBLE
-            }
-            "Raze" -> {
-                editor.putString("agents", "Raze")
-                imgRaze.visibility = View.VISIBLE
-            }
-            "Sage" -> {
-                editor.putString("agents", "Sage")
-                imgSage.visibility = View.VISIBLE
-            }
-            "Omen" -> {
-                editor.putString("agents", "Omen")
-                imgOmen.visibility = View.VISIBLE
-            }
-            "Phoenix" -> {
-                editor.putString("agents", "Phoenix")
-                imgPhoenix.visibility = View.VISIBLE
-            }
-            "Breach" -> {
-                editor.putString("agents", "Breach")
-                imgBreach.visibility = View.VISIBLE
-            }
-            "Brimstone" -> {
-                editor.putString("agents", "Brimstone")
-                imgBrimstone.visibility = View.VISIBLE
-            }
-            "Reyna" -> {
-                editor.putString("agents", "Reyna")
-                imgReyna.visibility = View.VISIBLE
-            }
-            "Jett" -> {
-                editor.putString("agents", "Jett")
-                imgJett.visibility = View.VISIBLE
-            }
-            "Viper" -> {
-                editor.putString("agents", "Viper")
-                imgViper.visibility = View.VISIBLE
-            }
-            "Cypher" -> {
-                editor.putString("agents", "Cypher")
-                imgCypher.visibility = View.VISIBLE
-            }
-            "Killjoy" -> {
-                editor.putString("agents", "Killjoy")
-                imgKilljoy.visibility = View.VISIBLE
-            }
-        }
-
-        editor.apply()
-    }
-
-    fun agentsToShow(index: String){
-        goneAll()
-        when (index) {
             "Sova" -> imgSova.visibility = View.VISIBLE
             "Raze" -> imgRaze.visibility = View.VISIBLE
             "Sage" -> imgSage.visibility = View.VISIBLE
@@ -288,52 +231,36 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             "Cypher" -> imgCypher.visibility = View.VISIBLE
             "Killjoy" -> imgKilljoy.visibility = View.VISIBLE
         }
-    }
-
-    fun saveCurrentAgents(){
-        val sharedPreferences = getPreferences(Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        if(imgSova.visibility == View.VISIBLE)
-            editor.putString("agents", "Sova")
-        else if(imgRaze.visibility == View.VISIBLE)
-            editor.putString("agents", "Raze")
-        else if(imgSage.visibility == View.VISIBLE)
-            editor.putString("agents", "Sage")
-        else if(imgOmen.visibility == View.VISIBLE)
-            editor.putString("agents", "Omen")
-        else if(imgPhoenix.visibility == View.VISIBLE)
-            editor.putString("agents", "Phoenix")
-        else if(imgBreach.visibility == View.VISIBLE)
-            editor.putString("agents", "Breach")
-        else if(imgBrimstone.visibility == View.VISIBLE)
-            editor.putString("agents", "Brimstone")
-        else if(imgReyna.visibility == View.VISIBLE)
-            editor.putString("agents", "Reyna")
-        else if(imgJett.visibility == View.VISIBLE)
-            editor.putString("agents", "Jett")
-        else if(imgViper.visibility == View.VISIBLE)
-            editor.putString("agents", "Viper")
-        else if(imgCypher.visibility == View.VISIBLE)
-            editor.putString("agents", "Cypher")
-        else if (imgKilljoy.visibility == View.VISIBLE)
-            editor.putString("agents", "Killjoy")
-
+        imgAgents.visibility = View.VISIBLE
+        imgShop.visibility = View.VISIBLE
         editor.apply()
     }
 
-    fun displayOldAgents(){
+    private fun displayAgents(){
         val sharedPreferences = getPreferences(Context.MODE_PRIVATE)
-        val agents: String? = sharedPreferences.getString("agents", "Sova")
-        if (agents != null)
-            agentsToShow(agents)
-        else
-            imgSova.visibility = View.VISIBLE
+        val agents = sharedPreferences.getString("agents", "Sova")
+        goneAll()
+        when (agents) {
+            "Sova" -> imgSova.visibility = View.VISIBLE
+            "Raze" -> imgRaze.visibility = View.VISIBLE
+            "Sage" -> imgSage.visibility = View.VISIBLE
+            "Omen" -> imgOmen.visibility = View.VISIBLE
+            "Phoenix" -> imgPhoenix.visibility = View.VISIBLE
+            "Breach" -> imgBreach.visibility = View.VISIBLE
+            "Brimstone" -> imgBrimstone.visibility = View.VISIBLE
+            "Reyna" -> imgReyna.visibility = View.VISIBLE
+            "Jett" -> imgJett.visibility = View.VISIBLE
+            "Viper" -> imgViper.visibility = View.VISIBLE
+            "Cypher" -> imgCypher.visibility = View.VISIBLE
+            "Killjoy" -> imgKilljoy.visibility = View.VISIBLE
+        }
+        imgAgents.visibility = View.VISIBLE
+        imgShop.visibility = View.VISIBLE
     }
 
-    fun reset(){
+    private fun reset(){
         val sharedPreferences = getPreferences(Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-
         editor
             .remove("click")
             .remove("coins")
@@ -350,8 +277,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             .remove("clickOmen")
             .remove("clickKilljoy")
             .remove("agents")
+            .remove("achat")
             .apply()
     }
-
 }
 
